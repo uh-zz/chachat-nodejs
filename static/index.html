@@ -1,0 +1,69 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="kdchat.css" />
+
+    <title>chachat-project</title>
+</head>
+<body>
+    <!-- <h3 id="me" user_id="1">わたし</h3>
+    <h3 id="you" thread_id="1">あなた</h3>
+    <div id="users">
+        <button class="user" user_id="2">ユーザー</button>
+    </div> -->
+    <br>
+
+    <div id="kdchat_container">
+
+        <!-- チャットの外側部分  -->
+        <div id="kdchat_message_container">
+
+            <!-- ヘッダー部分 -->
+            <div id="kdchat_chat_header">
+                <div id="kdchat_chat_user_status">
+                    <div id="kdchat_status_icon">●</div>
+                    <div id="kdchat_chat_user_name">うえはら</div>
+                </div>
+            </div>
+
+            <!-- タイムライン部分 -->
+            <div id="kdchat_messages">
+
+                <!-- メッセージ部分（自分） -->
+                <div class="kdchat_message kdchat_right">
+                    <div class="kdchat_message_box">
+                        <div class="kdchat_message_content">
+                            <div class="kdchat_message_text">新宿は〜</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 回り込みを解除 -->
+                <div class="kdchat_clear"></div>
+
+                <!-- メッセージ部分（相手） -->
+                <div class="kdchat_message kdchat_left">
+                        <div class="kdchat_message_box">
+                            <div class="kdchat_message_content">
+                                <div class="kdchat_message_text">豪雨〜</div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- 回り込みを解除 -->
+                    <div class="kdchat_clear"></div>
+    
+            </div>
+
+            <!-- テキストボックス、送信ボタン -->
+            <div id="kdhcat_send">
+                <textarea id="kdchat_send_message"></textarea>
+                <div id="kdchat_send_btn">submit</div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
