@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/kdchat.css" />
+
+    <title>chachat</title>
+</head>
+<body>
+    <div id="kdchat_container">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="js/kdchat.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+    $(function() {
+      var socketio = io.connect('http://localhost:8080');
+
+      $('form').submit(function() {
+          socketio.emit('chat message', $('#kdchat_send_message').val());
+          $('#kdchat_send_message').val();
+          return false;
+      })
+
+      socketio.on('chat message', function(msg) {
+        $('.kdchat_message_text').text(msg)
+      });
+      
+    });
+    </script>
+
+</body>
+</html>

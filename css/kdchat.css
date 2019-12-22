@@ -110,13 +110,13 @@
     padding: 4px;
 }
 
-/* テキストボックス */
+/* 送信テキスト */
 #kdchat_send_message{
     width: calc(100% - 75px);
     line-height: 16px;
     height: 48px;
     font-size: 16px;
-    padding: 14px 6px 0px 6px;
+    padding: 0px 6px 0px 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
     text-align: left;
