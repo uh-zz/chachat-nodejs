@@ -17,31 +17,6 @@ p('<div id="kdchat_message_container">');
 
     {/* タイムライン部分  */}
     p('<div id="kdchat_messages">');
-
-        {/* メッセージ部分（自分）  */}
-        p('<div class="kdchat_message kdchat_right">');
-            p('<div class="kdchat_message_box">');
-                p('<div class="kdchat_message_content">');
-                    p('<div class="kdchat_message_text">新宿は〜</div>');
-                p('</div>');
-            p('</div>');
-        p('</div>');
-
-        {/* 回り込みを解除  */}
-        p('<div class="kdchat_clear"></div>');
-
-        {/* メッセージ部分（相手）  */}
-        p('<div class="kdchat_message kdchat_left">');
-                p('<div class="kdchat_message_box">');
-                    p('<div class="kdchat_message_content">');
-                        p('<div class="kdchat_message_text">豪雨〜</div>');
-                    p('</div>');
-                p('</div>');
-            p('</div>');
-
-            {/* 回り込みを解除  */}
-            p('<div class="kdchat_clear"></div>');
-
     p('</div>');
 
     {/* テキストボックス、送信ボタン  */}

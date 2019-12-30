@@ -8,6 +8,7 @@ var mime = {
     ".js": "text/javascript"
 };
 
+var message = require('./js/message');
 
 var server = require('http').createServer(function(req, res) {
  
@@ -22,7 +23,7 @@ var server = require('http').createServer(function(req, res) {
     
     fs.readFile(fullpath, function(err, data) {
         if (err) {
-            console.log("file read error");
+            console.log("file read error", err);
         } else {
             res.end(data, "utf-8");
         }
@@ -30,12 +31,30 @@ var server = require('http').createServer(function(req, res) {
 
 }).listen(port);
 
-var io = require('socket.io').listen(server);
+// ユーザ管理
+var userMap = {};
 
 // websocket
+var io = require('socket.io').listen(server);
 io.on('connection', function(socket){
-    console.log('a user connected');
-    socket.on('chat message', function(msg) {
-        io.emit('chat message', msg);
+    
+    // チャット開始（チャットユーザ登録）
+    socket.on('connected', function(name) {
+        
+        userMap[socket.id] = name;
+        
+        // グループチャットで必要になりそう
+        var wallMsg = name + " joined";
+
+        socket.broadcast.emit('publish_wallMsg', wallMsg);
+    });
+
+    // ふきだしメッセージ送信
+    socket.on('publish_message', function(json) {
+
+        // ふきだし枠をjsonに追加
+        json.frame = message.speechBubble.bubble_frame;        
+
+        io.emit('publish_message', json);
     });
 });

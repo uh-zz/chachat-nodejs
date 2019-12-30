@@ -18,20 +18,74 @@
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
 
-    $(function() {
       var socketio = io.connect('http://localhost:8080');
 
+      // メッセージ送信
       $('form').submit(function() {
-          socketio.emit('chat message', $('#kdchat_send_message').val());
-          $('#kdchat_send_message').val();
+          
+          var request_json = {
+              user : myName,
+              message : $('#kdchat_send_message').val()
+          };
+
+          socketio.emit('publish_message', request_json);
+
+          // 画面側でのバリデーションが必要
+
+          // バリデーションの結果、submitを中止させたり
+
           return false;
       })
 
-      socketio.on('chat message', function(msg) {
-        $('.kdchat_message_text').text(msg)
+      // チャット開始（チャットユーザ登録）
+      socketio.on('connected', function(name) {});
+
+      // ユーザ通知（他のユーザがログインしたっていう）
+      socketio.on('publish_wallMsg', function(msg) {
+
+        var loginMsg = '<div class="kdchat_login"> ' + new Date().toLocaleTimeString() + '<br> ' + msg + ' </div>';
+        $('#kdchat_messages').append(loginMsg);
       });
-      
-    });
+
+      // ふきだしメッセージ
+      socketio.on('publish_message', function(json) {
+
+        var msg;
+        // ユーザのふきだし判定（自分なら緑のふきだし、相手なら白）        
+        if ( myName === json.user ) {
+          msg = json.frame.replace('right_or_left', 'kdchat_right')
+                          .replace('temp_text', json.message);
+        } else {
+          msg = json.frame.replace('right_or_left', 'kdchat_left')
+                          .replace('temp_text', json.message);
+        }
+
+        $('#kdchat_messages').append(msg);
+        
+        // スクロールを一番下にもってくる
+        var object = document.getElementById('kdchat_messages');
+        object.scrollTop = object.scrollHeight;
+     });
+    
+
+      // ユーザ作成（後々ログイン昨日を実装するまでの一時的なやつ）
+      var myName = 'ユーザ' + Math.floor( Math.random() * 100 );
+     
+      $(function(){
+
+        // 参加通知
+        console.log("user: " + myName);
+
+        var dateMsg = '<div class="kdchat_date"> ' + new Date().toLocaleDateString() + ' </div>';
+        $('#kdchat_messages').append(dateMsg);
+
+        var loginMsg = '<div class="kdchat_login"> ' + new Date().toLocaleTimeString() + '<br> login as ' + myName + ' </div>';
+        $('#kdchat_messages').append(loginMsg);
+
+        // チャット開始（チャットユーザ登録）
+        socketio.emit('connected', myName);
+      });
+  
     </script>
 
 </body>
