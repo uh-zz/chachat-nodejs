@@ -22,19 +22,27 @@
 
       // メッセージ送信
       $('form').submit(function() {
-          
-          var request_json = {
-              user : myName,
-              message : $('#kdchat_send_message').val()
-          };
 
-          socketio.emit('publish_message', request_json);
+        var input_message = $('#kdchat_send_message').val();
 
-          // 画面側でのバリデーションが必要
+        // 画面側でのバリデーションが必要
 
-          // バリデーションの結果、submitを中止させたり
+        // 空白チェックだけ
+        if ( input_message.length == 0 ) {          
+          console.log('not input message');
 
+          // submit中止
           return false;
+        }
+
+        var request_json = {
+          user : myName,
+          message : input_message
+        };
+
+        socketio.emit('publish_message', request_json);
+
+        return false;
       })
 
       // チャット開始（チャットユーザ登録）
@@ -54,10 +62,12 @@
         // ユーザのふきだし判定（自分なら緑のふきだし、相手なら白）        
         if ( myName === json.user ) {
           msg = json.frame.replace('right_or_left', 'kdchat_right')
-                          .replace('temp_text', json.message);
+                          .replace('temp_text', json.message)
+                          .replace('temp_date', new Date().toLocaleTimeString());
         } else {
           msg = json.frame.replace('right_or_left', 'kdchat_left')
-                          .replace('temp_text', json.message);
+                          .replace('temp_text', json.message)
+                          .replace('temp_date', new Date().toLocaleTimeString());
         }
 
         $('#kdchat_messages').append(msg);

@@ -20,10 +20,12 @@ p('<div id="kdchat_message_container">');
     p('</div>');
 
     {/* テキストボックス、送信ボタン  */}
-    p('<form id="kdhcat_send" action="">');
+    p('<form id="kdchat_send" action="">');
         p('<input id="kdchat_send_message" autocomplete="off">');
         p('<button id="kdchat_send_btn">submit</button>');
     p('</form>');
 
-    $('#kdchat_container').append(chatDom.join(''));
+p('</div>');
+
+$('#kdchat_container').append(chatDom.join(''));
 
