@@ -26,6 +26,14 @@
     float: left;
 }
 
+/* 入力中メッセージ */
+#kdchat_chat_user_typing{
+    float: right;
+    line-height: 2em;
+    padding: 5px;
+    font-size: 12px;
+}
+
 /* ステータスアイコン */
 #kdchat_status_icon{
     float: left;
@@ -91,18 +99,38 @@
 .kdchat_message_box{
     margin-top: 20px;
     margin-bottom: 10px;
-    max-width: 80%;
+    width: 80%;
     font-size: 16px;
     float: right;
 }
 
-/* コメント日付部分 */
-.kdchat_message_date{
+/* コメント日付部分(自分) */
+.kdchat_message_date_right{
     float: left;
     position: absolute;
     bottom: 0;
-    left: 0;
-    font-size: 12px;
+    left: 10px;
+    font-size: 10px;
+    color: #bcbcbc;
+}
+
+/* コメント日付部分(自分) */
+.kdchat_message_read{
+    float: left;
+    position: absolute;
+    bottom: 15px;
+    left: 10px;
+    font-size: 10px;
+    color: #bcbcbc;
+}
+
+/* コメント日付部分(相手) */
+.kdchat_message_date_left{
+    float: right;
+    position: absolute;
+    bottom: 0;
+    right: -30px;
+    font-size: 10px;
     color: #bcbcbc;
 }
 
@@ -115,7 +143,7 @@
     float: right;
     line-height: 1.3em;
     position: relative;
-    max-width: 80%;    
+    max-width: 40%;    
 }
 
 .kdchat_right .kdchat_message_box{
@@ -129,14 +157,15 @@
 .kdchat_left{
     float: left;
     line-height: 1.3em;
+    position: relative;
+    max-width: 40%;
 }
 
 .kdchat_left .kdchat_message_box{
     color: #333;
     background: #fff;
     border-radius: 0px 25px 25px 25px;
-    margin-left: 50px;
-    position: relative;
+    margin-left: 30px;
 }
 
 /* 回り込み解除 */

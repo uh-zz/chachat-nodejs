@@ -6,6 +6,7 @@ exports.speechBubble = {
                 <div class="kdchat_message_text"> temp_text </div>\
             </div>\
         </div>\
+        <div class="kdchat_message_read"></div>\        
         <div class="kdchat_message_date"> temp_date </div>\
     </div>\
 

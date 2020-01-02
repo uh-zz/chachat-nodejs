@@ -13,6 +13,7 @@ p('<div id="kdchat_message_container">');
             p('<div id="kdchat_status_icon">●</div>');
             p('<div id="kdchat_chat_user_name">うえはら</div>');
         p('</div>');
+        p('<div id="kdchat_chat_user_typing"></div>');
     p('</div>');
 
     {/* タイムライン部分  */}
