@@ -75,10 +75,13 @@
         typingText.innerHTML = '';
       });
 
-      // テキストボックスに誰かが入力し始めたらユーザ入力中にする
-      // 加えて自分のメッセージに既読をつける
+      // テキストボックスに誰かが入力し始めた時のイベント群
       document.querySelector('#kdchat_send_message').addEventListener('keyup', function(){
-        
+       
+        // 自分のテキストボックスに入力された文字があれば送信ボタンの色を変える
+        var hexColor = $('#kdchat_send_message').val().length > 0 ? '#33d449': '#bcbcbc';
+        $('#kdchat_send_btn').css('background', hexColor);
+
         // 既読をつける
         socketio.emit('check_read');
 
