@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="css/kdchat.css" />
+
+    <title>chachat</title>
+</head>
+<body>
+    <div id="kdchat_container">
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="js/kdchat.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+      var socketio = io.connect('http://localhost:8080');
+
+      // メッセージ送信
+      $('form').submit(function() {
+
+        var input_message = $('#kdchat_send_message').val();
+
+        // 画面側でのバリデーションが必要
+
+        // 空白チェックだけ
+        if ( input_message.length == 0 ) {          
+          console.log('not input message');
+
+          // submit中止
+          return false;
+        }
+
+        var request_json = {
+          user : myName,
+          message : input_message
+        };
+
+        socketio.emit('publish_message', request_json);
+
+        return false;
+      })
+
+      // チャット開始（チャットユーザ登録）
+      socketio.on('connected', function(name) {});
+
+      // ユーザ通知（他のユーザがログインしたっていう）
+      socketio.on('publish_wallMsg', function(msg) {
+
+        var loginMsg = '<div class="kdchat_login"> ' + new Date().toLocaleTimeString() + '<br> ' + msg + ' </div>';
+        $('#kdchat_messages').append(loginMsg);
+      });
+
+      // 既読チェック
+      socketio.on('check_read', function(name) {
+
+        // 自分と異なるユーザが入力したとき
+        if (name !== myName) {
+          $('.kdchat_details_read').text('read');
+        }
+      });
+
+      // 入力中のふきだし開始
+      var typingText = document.querySelector('#kdchat_chat_user_typing')
+      socketio.on('start_typing', function(user){
+        typingText.innerHTML += user + ' is typing...';
+      });
+      
+      // 入力中のふきだし終了
+      socketio.on('end_typing', function(){
+        typingText.innerHTML = '';
+      });
+
+      // テキストボックスに誰かが入力し始めたらユーザ入力中にする
+      // 加えて自分のメッセージに既読をつける
+      document.querySelector('#kdchat_send_message').addEventListener('keyup', function(){
+        
+        // 既読をつける
+        socketio.emit('check_read');
+
+        // 入力中のメッセージ
+        socketio.emit('start_typing');  
+
+      });
+
+      // ふきだしメッセージ
+      socketio.on('publish_message', function(json) {
+
+        var msg = (
+          // ユーザのふきだし判定（自分なら緑のふきだし、相手なら白） 
+           ( myName === json.user )
+                ? json.frame.myBubble
+                : json.frame.theirBubble
+        );
+
+        msg = msg.replace('temp_text', json.message)
+                  .replace('temp_date', new Date().toLocaleTimeString());
+
+        $('#kdchat_messages').append(msg);
+
+        // ユーザ入力の終了
+        socketio.emit('end_typing');
+
+        // スクロールを一番下にもってくる
+        var object = document.getElementById('kdchat_messages');
+        object.scrollTop = object.scrollHeight;
+     });
+    
+
+      // ユーザ作成（後々ログイン昨日を実装するまでの一時的なやつ）
+      var myName = 'ユーザ' + Math.floor( Math.random() * 100 );
+     
+      $(function(){
+
+        // 参加通知
+        console.log("user: " + myName);
+
+        var dateMsg = '<div class="kdchat_date"> ' + new Date().toLocaleDateString() + ' </div>';
+        $('#kdchat_messages').append(dateMsg);
+
+        var loginMsg = '<div class="kdchat_login"> ' + new Date().toLocaleTimeString() + '<br> login as ' + myName + ' </div>';
+        $('#kdchat_messages').append(loginMsg);
+
+        // チャット開始（チャットユーザ登録）
+        socketio.emit('connected', myName);
+      });
+  
+    </script>
+
+</body>
+</html>

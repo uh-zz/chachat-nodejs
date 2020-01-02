@@ -1,0 +1,232 @@
+/* チャット全体 */
+#kdchat_container{
+    width: auto;
+    height: 600px;
+}
+
+/* チャット外側部分 */
+#kdchat_message_container{
+    height: 100%;
+    width: 100%;
+    background-color: #eee;
+}
+
+/* ヘッダー部分 */
+#kdchat_chat_header{
+    padding: 6px;
+    font-size: 16px;
+    height: 5%;
+    border-radius: 4px;
+    background: #ddd; 
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+#kdchat_chat_user_status{
+    float: left;
+}
+
+/* 入力中メッセージ */
+#kdchat_chat_user_typing{
+    float: right;
+    line-height: 2em;
+    padding: 5px;
+    font-size: 12px;
+}
+
+/* ステータスアイコン */
+#kdchat_status_icon{
+    float: left;
+    line-height: 2rem;   
+}
+
+/* ユーザ名 */
+#kdchat_chat_user_name{
+    float: left;
+    line-height: 2em;
+    padding: 5px;
+}
+
+/* タイムライン部分 */
+#kdchat_messages{
+    overflow: auto;
+    height: 95%;
+    width: 100%;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    background-color: #252933;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, .2);
+}
+
+/* 日付部分 */
+.kdchat_date{
+    width: 30%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #bcbcbc;
+    text-align: center;
+    background-color: #3b3f48;
+    border-radius: 15px;
+}
+
+/* ログインメッセージ部分 */
+.kdchat_login{
+    width: 80%;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #bcbcbc;
+    text-align: center;
+    background-color: #3b3f48;
+    border-radius: 15px;
+}
+
+/* ふきだしメッセージ */
+.kdchat_message{
+    width: 100%;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.kdchat_message .kdchat_faceicon{
+    float: left;
+    margin-right: -50px;
+    width: 40px;
+}
+
+.kdchat_message .kdchat_faceicon img{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.kdchat_message .kdchat_content_left{
+    width: 100%;
+    text-align: left;
+}
+
+ /* メッセージ(相手) */
+.kdchat_text{
+    display: inline-block;
+    position: relative;
+    word-wrap: break-word;
+    margin: 0 0 0 50px;
+    padding: 10px;
+    max-width: 250px;
+    border-radius: 12px;
+    background: #edf1ee;
+}
+
+.kdchat_text:after{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    left: -19px;
+    border: 8px solid transparent;
+    border-right: 18px solid #edf1ee;
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg);
+}
+
+.kdchat_text p{
+    margin: 0;
+    padding: 0;
+}
+
+.kdchat_details{
+    display: inline-block;
+    vertical-align: bottom;
+    font-size: 12px;
+    color: #bcbcbc;
+}
+
+.kdchat_message .kdchat_content_right{
+    width: 100%;
+    text-align: right;
+}
+
+.kdchat_message_myself{
+    display: inline-block;
+    margin: 0 40px 0 0;
+    word-wrap: break-word;
+}
+
+.kdchat_message_myself p{
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    margin: 0 10px 0 0;
+    padding: 8px;
+    max-width: 250px;
+    border-radius: 12px;
+    background: #53cf55;
+    font-size: 15px;
+}
+
+.kdchat_message_myself p:after{
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -19px;
+    border: 8px solid transparent;
+    border-left: 18px solid #53cf55;
+    -webkit-transform: tate(-35deg);
+    transform: rotate(-35deg);
+}
+
+/* 回り込み解除 */
+.kdchat_clear{
+    clear: both;
+}
+
+/* 送信部分 */
+#kdchat_send{
+    background-color: #eee;
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    height: 8%;
+    padding: 4px;
+}
+
+/* 送信テキスト */
+#kdchat_send_message{
+    width: calc(100% - 75px);
+    line-height: 16px;
+    height: 100%;
+    font-size: 16px;
+    padding: 0px 6px 0px 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: left;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, .2) inset;
+    box-sizing: border-box;
+}
+
+/* 送信ボタン */
+#kdchat_send_btn{
+    width: 72px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 3em;
+    float: right;
+    color: #fff;
+    font-weight: bold;
+    background: #bcbcbc;
+    text-align: center;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#kdchat_send_btn:hover{
+    background: #33d449;
+    cursor: pointer;
+}
+
