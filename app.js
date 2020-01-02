@@ -81,8 +81,8 @@ io.on('connection', function(socket){
     socket.on('publish_message', function(json) {
 
         // ふきだし枠をjsonに追加
-        json.frame = message.speechBubble.bubble_frame;        
-
+        json.frame = message.bubbleFrame;
+       
         io.emit('publish_message', json);
     });
 

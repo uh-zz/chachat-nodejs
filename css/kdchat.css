@@ -86,86 +86,98 @@
     border-radius: 15px;
 }
 
-/* メッセージ部分 */
+/* ふきだしメッセージ */
 .kdchat_message{
-    margin: 0px;
-    padding: 0 14px;
-    font-size: 16px;
+    width: 100%;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.kdchat_message .kdchat_faceicon{
+    float: left;
+    margin-right: -50px;
+    width: 40px;
+}
+
+.kdchat_message .kdchat_faceicon img{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.kdchat_message .kdchat_content_left{
+    width: 100%;
+    text-align: left;
+}
+
+ /* メッセージ(相手) */
+.kdchat_text{
+    display: inline-block;
+    position: relative;
     word-wrap: break-word;
-    white-space: normal;
+    margin: 0 0 0 50px;
+    padding: 10px;
+    max-width: 250px;
+    border-radius: 12px;
+    background: #edf1ee;
 }
 
-/* 吹き出し部分 */
-.kdchat_message_box{
-    margin-top: 20px;
-    margin-bottom: 10px;
-    width: 80%;
-    font-size: 16px;
-    float: right;
-}
-
-/* コメント日付部分(自分) */
-.kdchat_message_date_right{
-    float: left;
+.kdchat_text:after{
+    content: "";
+    display: inline-block;
     position: absolute;
-    bottom: 0;
-    left: 10px;
-    font-size: 10px;
+    top: 3px;
+    left: -19px;
+    border: 8px solid transparent;
+    border-right: 18px solid #edf1ee;
+    -webkit-transform: rotate(35deg);
+    transform: rotate(35deg);
+}
+
+.kdchat_text p{
+    margin: 0;
+    padding: 0;
+}
+
+.kdchat_details{
+    display: inline-block;
+    vertical-align: bottom;
+    font-size: 12px;
     color: #bcbcbc;
 }
 
-/* コメント日付部分(自分) */
-.kdchat_message_read{
-    float: left;
-    position: absolute;
-    bottom: 15px;
-    left: 10px;
-    font-size: 10px;
-    color: #bcbcbc;
+.kdchat_message .kdchat_content_right{
+    width: 100%;
+    text-align: right;
 }
 
-/* コメント日付部分(相手) */
-.kdchat_message_date_left{
-    float: right;
-    position: absolute;
-    bottom: 0;
-    right: -30px;
-    font-size: 10px;
-    color: #bcbcbc;
+.kdchat_message_myself{
+    display: inline-block;
+    margin: 0 40px 0 0;
+    word-wrap: break-word;
 }
 
-.kdchat_message_content{
-    padding: 20px;
-}
-
-/* メッセージ部分（自分） */
-.kdchat_right{
-    float: right;
-    line-height: 1.3em;
+.kdchat_message_myself p{
+    display: inline-block;
     position: relative;
-    max-width: 40%;    
-}
-
-.kdchat_right .kdchat_message_box{
-    color: #333;
+    text-align: left;
+    margin: 0 10px 0 0;
+    padding: 8px;
+    max-width: 250px;
+    border-radius: 12px;
     background: #53cf55;
-    border-radius: 25px 0px 25px 25px;
-    margin-left: 30px;
+    font-size: 15px;
 }
 
-/* メッセージ部分（相手） */
-.kdchat_left{
-    float: left;
-    line-height: 1.3em;
-    position: relative;
-    max-width: 40%;
-}
-
-.kdchat_left .kdchat_message_box{
-    color: #333;
-    background: #fff;
-    border-radius: 0px 25px 25px 25px;
-    margin-left: 30px;
+.kdchat_message_myself p:after{
+    content: "";
+    position: absolute;
+    top: 3px;
+    right: -19px;
+    border: 8px solid transparent;
+    border-left: 18px solid #53cf55;
+    -webkit-transform: tate(-35deg);
+    transform: rotate(-35deg);
 }
 
 /* 回り込み解除 */
@@ -217,3 +229,4 @@
     background: #33d449;
     cursor: pointer;
 }
+

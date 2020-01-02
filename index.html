@@ -60,7 +60,7 @@
 
         // 自分と異なるユーザが入力したとき
         if (name !== myName) {
-          $('.kdchat_message_read').text('read');
+          $('.kdchat_details_read').text('read');
         }
       });
 
@@ -90,22 +90,18 @@
       // ふきだしメッセージ
       socketio.on('publish_message', function(json) {
 
-        var msg;
-        // ユーザのふきだし判定（自分なら緑のふきだし、相手なら白）        
-        if ( myName === json.user ) {
-          msg = json.frame.replace('right_or_left', 'kdchat_right')
-                          .replace('temp_text', json.message)
-                          .replace('kdchat_message_date', 'kdchat_message_date_right')
-                          .replace('temp_date', new Date().toLocaleTimeString());
-        } else {
-          msg = json.frame.replace('right_or_left', 'kdchat_left')
-                          .replace('temp_text', json.message)
-                          .replace('kdchat_message_date', 'kdchat_message_date_left')
-                          .replace('temp_date', new Date().toLocaleTimeString());
-        }
+        var msg = (
+          // ユーザのふきだし判定（自分なら緑のふきだし、相手なら白） 
+           ( myName === json.user )
+                ? json.frame.myBubble
+                : json.frame.theirBubble
+        );
+
+        msg = msg.replace('temp_text', json.message)
+                  .replace('temp_date', new Date().toLocaleTimeString());
 
         $('#kdchat_messages').append(msg);
-        
+
         // ユーザ入力の終了
         socketio.emit('end_typing');
 
